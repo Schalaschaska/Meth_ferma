@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace Meth_ferma
 {
     /// <summary>
@@ -23,55 +24,114 @@ namespace Meth_ferma
         public MainWindow()
         {
             InitializeComponent();
+            
         }
-
+       public double mn = 0;
+       public double mn2 = 0;
+       public double mn_2 = 0;
+       public double mn2_2 = 0;
+        public double mn_2_s = 0;
+        public double mn2_2_s = 0;
+        public bool p_f_1 = false;
+       public bool p_f_2 = false;
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            int n = Convert.ToInt32(textBox.Text);
-            double S = 0;
-            double y;
-            double k = 1;
-            double sqr_S = Math.Sqrt(S);
-            bool flag=true;
-            double pr_rez = 0;
-            bool prost = true;
-            double mn = 0;
-            double mn2 = 0;
             
-
-            for (int i = 2; i <= n / 2; i++)
+            int n = Convert.ToInt32(textBox.Text);
+            if (n % 2 == 0)
             {
-                if (n % i == 0)
-                {
-                    prost = false;
-                    break;
-                }
-            }
-            if (prost)
-            {
-                MessageBox.Show("Число простое");
+                MessageBox.Show("Факторизация невыполнима");
             }
             else
             {
-               MessageBox.Show("Число не простое");
-            }
-         
-            Pr Ob = new Pr();
-            while(Ob.flag)
-            {
-                mn = Ob.Z(n);
-                mn2 = Ob.Z2(n);
-                
-            }
-            {
+                double S = 0;
+                double sqr_S = Math.Sqrt(S);
+                bool prost = true;
+               
+                Pr Ob = new Pr();
+                for (int i = 2; i <= n / 2; i++)
+                {
+                    if (n % i == 0)
+                    {
+                        prost = false;
+                        break;
+                    }
+                }
+                if (prost)
+                {
+                    MessageBox.Show("Число простое");
+                }
+                else
+                {
+
+                    mn = Ob.Z(n);
+                    mn2 = Ob.Z2(n);
+                    prost = true;
+                    for (int i = 2; i <= mn / 2; i++)
+                    {
+                        if (mn % i == 0)
+                        {
+                            prost = false;
+                            break;
+                        }
+                    }
+                    if (prost)
+                    {
+                       // MessageBox.Show("Первый множитель простой");
+                    }
+                    else
+                    {
+                       // MessageBox.Show("Первый множитель составной");
+                        Pr ob_1 = new Pr();
+                        mn_2 = ob_1.Z(mn);
+                        mn2_2 = ob_1.Z2(mn);
+                        p_f_1 = true;
+                    }
+                    for (int i = 2; i <= mn2 / 2; i++)
+                    {
+                        if (mn2 % i == 0)
+                        {
+                            prost = false;
+                            break;
+                        }
+                    }
+                    if (prost)
+                    {
+                        //MessageBox.Show("Второй множитель простой");
+                    }
+                    else
+                    {
+                        //MessageBox.Show("Второй множитель составной");
+                        Pr ob_2 = new Pr();
+                        mn_2_s = ob_2.Z(mn2);
+                        mn2_2_s = ob_2.Z2(mn2);
+                        p_f_2 = true;
+
+
+                    }
+
+                    label1.Content = "Разложение числа " + n + " произошло за " + (Ob.k - 1) + " итераций\nПервый множитель " + mn + "\nВторой множитель " + mn2;
+                    if(p_f_1==true)
+                    {
+                        label1.Content="Разложение числа " + n + " произошло за " + (Ob.k - 1) + " итераций\nПервый множитель " + mn_2 + " и " + mn2_2 + "\nВторой множитель " + mn2;
+                    }
+                    if(p_f_2==true)
+                    {
+                        label1.Content="Разложение числа " + n + " произошло за " + (Ob.k - 1) + " итераций\nПервый множитель " +mn + "\nВторой множитель " + mn_2_s+ " и "+mn2_2_s;
+
+                    }
+                    if(p_f_1==true&&p_f_2==true)
+                    {
+                        label1.Content = "Разложение числа " + n + " произошло за " + (Ob.k - 1) + " итераций\nПервый множитель "+ mn_2 + " и " + mn2_2 + "\nВторой множитель " + mn_2_s + " и " + mn2_2_s;
+
+                    }
+                }
 
             }
-            
-            label1.Content = "Разложение числа " + n + " было достигнуто за " + (Ob.k-1)+ " итераций\nПервый множитель " + Convert.ToString(Ob.Z(n)) + "\nВторой множитель " + Convert.ToString(Ob.Z2(n));
         }
 
-
-        }
+        
+    }
     }
 
 

@@ -8,9 +8,10 @@ namespace Meth_ferma
 {
     class Pr
     {
-        public double S, y, sqr_S, k = 1, pr_rez, mn, mn2, K;
+        
+        public double S, y, sqr_S, k, pr_rez, mn, mn2;
         public bool flag = true;
-        public double Z(int N)
+        public double Z(double N)
         {
             while (flag != false)
             {
@@ -28,6 +29,8 @@ namespace Meth_ferma
 
                     mn = (S + (k - 1) + sqr_S);
                     mn2 = (S + (k - 1) - sqr_S);
+
+
                 }
                
             }
@@ -35,7 +38,7 @@ namespace Meth_ferma
             return mn;
 
         }
-        public double Z2(int N)
+        public double Z2(double N)
         {
             while (flag != false)
             {
@@ -57,9 +60,9 @@ namespace Meth_ferma
             return mn2;
 
         }
+ 
+  
 
-      
-       
     }
     
 }
